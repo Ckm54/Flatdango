@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const remainingTickets = getRemainingtickets(movie);
         if(remainingTickets === 0) {
-            item.setAttribute("class", "sold-out")
+            item.setAttribute("class", "sold-out film item")
         }
 
         item.addEventListener("click", function(){
