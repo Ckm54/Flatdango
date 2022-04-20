@@ -21,9 +21,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function displayMovieTitle(movie) {
         let item = document.createElement("li")
+        let delBtn = document.createElement("button")
+        delBtn.innerText = "Delete"
+        delBtn.addEventListener("click", () => {
+            item.remove()
+            deleteMovie(movie.id)
+        })
         item.setAttribute("class", "film item")
         item.innerText = movie.title
         movieTitlesList.append(item)
+        movieTitlesList.appendChild(delBtn)
 
         const remainingTickets = getRemainingtickets(movie);
         if(remainingTickets === 0) {
@@ -33,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
         item.addEventListener("click", function(){
             displayMovieInfo(movie)
         })
+        
     }
 
     function getRemainingtickets(movie){
@@ -97,5 +105,16 @@ document.addEventListener("DOMContentLoaded", () => {
             movieTitlesList.innerHTML = ''
             initialFetch()
         })
+    }
+
+    function deleteMovie(id) {
+        fetch(`http://localhost:3000/films/${id}`, {
+            method: 'DELETE',
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(movie => movie)
     }
 })
