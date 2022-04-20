@@ -8,9 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
         movies.forEach(movie => {
             console.log(movie)
             displayMovieTitle(movie)
-            // if (movie.id === 1) {
-            //     displayMovieInfo(movie)
-            // }
+            if (parseInt(movie.id) === 1) {
+                displayMovieInfo(movie)
+            }
         })
     })
 
@@ -20,6 +20,14 @@ document.addEventListener("DOMContentLoaded", () => {
         item.innerText = movie.title
         movieTitlesList.append(item)
 
-        
+        item.addEventListener("click", function(){
+            displayMovieInfo(movie)
+        })
+    }
+
+    function displayMovieInfo(movie) {
+        const imageTag = document.getElementById("poster")
+        imageTag.setAttribute("src", movie.poster)
+        imageTag.setAttribute("alt", movie.title)
     }
 })
